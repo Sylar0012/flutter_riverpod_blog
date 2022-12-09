@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
-      initialRoute: Routers.home,
+      initialRoute: Routers.joinForm,
       // 라우트 설계 필요없음. GetX 사용할 예정
       routes: {
         Routers.home: (context) => HomePage(),
