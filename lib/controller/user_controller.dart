@@ -66,13 +66,11 @@ class UserController {
 
     // 3. 비지니스 로직 처리
     if (responseDto.code == 1) {
-      User user = User.fromJson(responseDto.data);
-      print("가입된 유저 이름 : ${user.username}");
-      Navigator.popAndPushNamed(context, Routers.loginForm);
+      Navigator.popAndPushNamed(context, Routers.home);
       // 4. 응답된 데이터를 ViewModel에 반영해야 한다면 통신 성공시에 추가하기
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("회원가입 실패")),
+        SnackBar(content: Text("로그인 실패")),
       );
     }
   }
