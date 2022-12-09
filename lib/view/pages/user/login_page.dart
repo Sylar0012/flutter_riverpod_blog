@@ -58,10 +58,10 @@ class LoginPage extends ConsumerWidget {
             text: "로그인",
             funPageRoute: () async {
               if (_formKey.currentState!.validate()) {
-                // uc.login(
-                //   "username" : _username,
-                //   "password" : _password,
-                // );
+                uc.login(
+                  username: _username.text.trim(),
+                  password: _password.text.trim(),
+                );
               }
             },
           ),

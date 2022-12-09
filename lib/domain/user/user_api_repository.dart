@@ -5,6 +5,8 @@ import 'package:blog/dto/auth_req_dto.dart';
 import 'package:blog/dto/response_dto.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart';
+import 'package:logger/logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final userApiRepository = Provider<UserApiRepository>((ref) {
   return UserApiRepository(ref);
@@ -38,6 +40,10 @@ class UserApiRepository {
 
     String jwtToken = response.headers["authorization"].toString();
 
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString("jwtToken", jwtToken); // 자동 로그인시 필요
+
+    Logger().d(jwtToken); // 로그 찍기
     // 3. 문자열 -> Map
     Map<String, dynamic> responseMap = jsonDecode(response.body);
 
