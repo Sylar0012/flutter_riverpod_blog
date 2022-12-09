@@ -1,5 +1,6 @@
 import 'package:blog/core/size.dart';
 import 'package:blog/provider/auth_provider.dart';
+import 'package:blog/view/pages/post/home_page_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -17,7 +18,8 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final ap = ref.read(authProvider); // 추가
+    // final ap = ref.read(authProvider); // 홈페이지 뷰 모델이 다 들고 있어서 ㄱㅊ
+    final hvm = ref.watch(homePageViewModel.notifier); // 추가
     return Scaffold(
       key: scaffodKey,
       floatingActionButton: FloatingActionButton(
@@ -32,7 +34,7 @@ class _HomePageState extends ConsumerState<HomePage> {
       ),
       drawer: _navigation(context),
       appBar: AppBar(
-        title: _buildAppbertilte(ap), //추가
+        title: _buildAppbertilte(hvm), //추가
       ),
       body: RefreshIndicator(
         key: refreshKey,
@@ -43,7 +45,6 @@ class _HomePageState extends ConsumerState<HomePage> {
             return InkWell(
               onTap: () {},
               child: ListTile(
-                leading: Text("아이디"),
                 title: Text("제목"),
               ),
             );
@@ -56,9 +57,9 @@ class _HomePageState extends ConsumerState<HomePage> {
     );
   }
 
-  Text _buildAppbertilte(AuthProvider ap) {
-    if (ap.isLogin) {
-      return Text("로그인한 유저 이름 : ${ap.user!.username}");
+  Text _buildAppbertilte(HomePageViewModel hvm) {
+    if (hvm.ap.isLogin) {
+      return Text("로그인한 유저 이름 : ${hvm.ap.jwtToken}");
     } else {
       return Text("로그인 되지 않은 상태 입니다.");
     }

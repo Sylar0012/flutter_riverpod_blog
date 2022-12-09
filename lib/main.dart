@@ -28,7 +28,6 @@ class MyApp extends StatelessWidget {
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       initialRoute: Routers.home,
-      // 라우트 설계 필요없음. GetX 사용할 예정
       routes: {
         Routers.home: (context) => HomePage(),
         Routers.detail: (context) => DetailPage(),
